@@ -107,6 +107,11 @@ in
                 ];
             };
         };
+        oh-my-posh = {
+            enable = true;
+            enableZshIntegration = true;
+            useTheme = "atomicBit";
+        };
         z-lua = {
             enable = true;
             enableZshIntegration = true;
