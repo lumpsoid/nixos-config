@@ -55,6 +55,7 @@ in
         # if you want to add some packages or libraris to the programm use this
         #wineWowPackages.full
         #lutris
+        protonup-qt
         xorg.libX11
         vulkan-tools
         vulkan-loader
