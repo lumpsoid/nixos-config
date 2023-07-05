@@ -17,6 +17,8 @@ in
     #home.keyboard.options = [ "grp:caps_toggle" ]; don't work
 
     home.packages = with pkgs; [
+        xorg.xev
+        evtest-qt
         pass  # password manager
         bluez  # bluetooth manager
         acpi

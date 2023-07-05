@@ -15,7 +15,8 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   security.polkit.enable = true;
-  #boot.kernelParams = [ "acpi_backlight=native" ];
+  #boot.kernelParams = [ "amd-pstate=active" ]; linux 6.3
+  boot.kernelParams = [ "psmouse.elantech_smbus=0" ];  # https://wiki.ubuntu.com/DebuggingTouchpadDetection#In_case_at_least_one_of_the_Touchpad_features_work.2C_but_does_not_work_correctly_and_as_expected
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -53,14 +54,15 @@
 
     libinput = {
       enable = true;
-      touchpad.disableWhileTyping = true;
-      touchpad.accelProfile = "flat";
+      touchpad = {
+        #disableWhileTyping = true;
+        accelProfile = "flat";
+        additionalOptions = '''';
+      };
       #mouse.sendEventsMode = "disabled";
     };
     inputClassSections = [''
           Identifier "laptop mouse input"
-          MatchDriver "libinput"
-          MatchIsPointer "on"
           MatchProduct "ELAN0752:00 04F3:31C2 Mouse"
           Option "SendEventsMode" "disabled"
     ''];
@@ -116,6 +118,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    libinput
     lxqt.lxqt-policykit
     (st.overrideAttrs (oldAttrs: rec {
       src = fetchFromGitHub {
