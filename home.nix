@@ -109,7 +109,7 @@ in
             };
         };
         oh-my-posh = {
-            enable = true;
+            enable = false;
             enableZshIntegration = true;
             useTheme = "atomicBit";
         };

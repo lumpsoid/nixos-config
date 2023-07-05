@@ -54,7 +54,7 @@
     libinput = {
       enable = true;
       touchpad.disableWhileTyping = true;
-      #touchpad.accelProfile = "flat";
+      touchpad.accelProfile = "flat";
       #mouse.sendEventsMode = "disabled";
     };
     inputClassSections = [''
