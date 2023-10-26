@@ -1,4 +1,9 @@
-with import <nixpkgs> {};
+with import <nixpkgs> {
+    config = {
+        allowUnfree = true;
+        cudaSupport = true;
+    };
+};
 (let
   pandasflavor = python3.pkgs.buildPythonPackage rec {
     pname = "pandas_flavor";
@@ -69,6 +74,7 @@ in python3.withPackages (ps: with ps; [
     pandas
     numpy
     pingouin
-    tensorflowWithCuda
+    pytorch-bin
+    torchmetrics
   ])
 ).env
