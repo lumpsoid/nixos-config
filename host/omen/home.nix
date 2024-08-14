@@ -5,6 +5,9 @@
 }: let
   nixConfigRoot = "../..";
 in {
+  imports = [
+    ../../modules/scripts/rebuild.nix
+  ];
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "qq";
@@ -100,6 +103,8 @@ in {
       enable = true;
     };
   };
+
+  scripts.rebuild-nix.enable = true;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
