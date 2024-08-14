@@ -142,6 +142,7 @@
     isNormalUser = true;
     description = "qq";
     extraGroups = ["networkmanager" "wheel" "video" "adbusers" "docker"];
+    shell = pkgs.fish;
     packages = with pkgs; [
       #  thunderbird
       vscode
@@ -151,6 +152,7 @@
       alejandra
     ];
   };
+  programs.fish.enable = true;
   programs.adb.enable = true;
   virtualisation.docker = {
     enable = true;
