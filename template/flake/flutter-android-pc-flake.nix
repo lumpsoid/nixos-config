@@ -1,10 +1,20 @@
 {
-  description = "moxplatform";
+  description = "flutter development";
+
   inputs = {
+    devshell.url = "github:numtide/devshell";
+    systems.url = "github:nix-systems/default";
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    #nixpkgs.url = "github:NixOS/nixpkgs/23.05";
-    flake-utils.url = "github:numtide/flake-utils";
-    android-nixpkgs.url = "github:tadfisher/android-nixpkgs";
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+      inputs.systems.follows = "systems";
+    };
+    android-nixpkgs = {
+      url = "github:tadfisher/android-nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.devshell.follows = "devshell";
+    };
   };
 
   outputs = {
@@ -12,6 +22,7 @@
     nixpkgs,
     flake-utils,
     android-nixpkgs,
+    ...
   }:
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = import nixpkgs {
@@ -34,10 +45,13 @@
           platforms-android-30
           platforms-android-31
           platforms-android-33
+          platforms-android-34
         ]);
       pinnedJDK = pkgs.jdk17;
     in {
-      devShell = pkgs.mkShell {
+      # don't need to write the <system> part
+      # because we inherited system in pkgs
+      devShells.default = pkgs.mkShell {
         buildInputs = with pkgs; [
           # Android
           pinnedJDK
@@ -75,6 +89,7 @@
         ANDROID_SDK_ROOT = "${sdk}/share/android-sdk";
         JAVA_HOME = pinnedJDK;
 
+        GRADLE_USER_HOME = "/home/qq/.gradle";
         # Fix an issue with Flutter using an older version of aapt2, which does not know
         # an used parameter.
         GRADLE_OPTS = "-Dorg.gradle.project.android.aapt2FromMavenOverride=${sdk}/share/android-sdk/build-tools/34.0.0/aapt2";
