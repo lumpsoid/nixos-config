@@ -81,11 +81,9 @@ in {
   };
 
   programs = {
-    bash.enable = true;
-
     fzf = {
       enable = true;
-      enableBashIntegration = true;
+      enableFishIntegration = true;
     };
 
     git = {
@@ -93,6 +91,8 @@ in {
       userEmail = "mmgeeki@gmail.com";
       userName = "lumpsoid";
     };
+
+    fish.enable = true;
   };
 
   services = {
