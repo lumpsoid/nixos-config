@@ -13,7 +13,7 @@
 set -e
 
 # Edit your config
-$EDITOR configuration.nix
+$EDITOR /home/qq/configos/host/omen/configuration.nix
 
 # cd to your config dir
 pushd ~/configos/

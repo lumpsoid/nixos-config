@@ -10,35 +10,20 @@
     };
   };
 
-  outputs = { self, nixpkgs, ... }@inputs:
-  let 
+  outputs = {
+    self,
+    nixpkgs,
+    ...
+  } @ inputs: let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
-  in
-  {
+  in {
     nixosConfigurations.omen = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = [
         ./host/omen/configuration.nix
         inputs.home-manager.nixosModules.default
       ];
-    };
-    apps.${system}.default = {
-      type = "app";
-      program = pkgs.writeShellApplication {
-        name = "rebuild-nix";
-
-        runtimeEnv = [ ];
-
-        runtimeInputs = with pkgs; [
-          coreutils
-          git
-          alejandra
-          libnotify
-        ];
-
-        text = builtins.readFile ./modules/scripts/nix-rebuild.sh;
-      };
     };
   };
 }

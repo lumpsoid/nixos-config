@@ -1,6 +1,7 @@
 with import <nixpkgs> {};
-(
-    python3.withPackages (ps: with ps; [
+  (
+    python3.withPackages (ps:
+      with ps; [
         jupyter-core
         jupyter_console
         qtconsole
@@ -15,4 +16,5 @@ with import <nixpkgs> {};
         lxml
         pandas
       ])
-).env
+  )
+  .env

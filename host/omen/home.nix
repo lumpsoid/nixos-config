@@ -1,8 +1,10 @@
-{ config, pkgs, ... }:
-let
-  nixConfigRoot = "../..";
-in
 {
+  config,
+  pkgs,
+  ...
+}: let
+  nixConfigRoot = "../..";
+in {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "qq";
@@ -78,7 +80,6 @@ in
     # EDITOR = "emacs";
   };
 
-  
   programs = {
     bash.enable = true;
 
@@ -93,7 +94,6 @@ in
       userName = "lumpsoid";
     };
   };
-
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
