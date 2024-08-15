@@ -126,14 +126,12 @@
   fonts = {
     fontDir.enable = true;
     packages = with pkgs; [
-      (pkgs.nerdfonts.override { fonts = [ "0xProto" ]; })
-      noto-fonts-emoji
+      (nerdfonts.override { fonts = [ "0xProto" ]; })
     ];
     fontconfig = {
       enable = true;
       defaultFonts = {
         monospace = ["0xProto"];
-        emoji = ["Noto Color Emoji"];
       };
     };
   };
