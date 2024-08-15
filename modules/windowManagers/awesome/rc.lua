@@ -151,24 +151,32 @@ local tasklist_buttons = gears.table.join(
                                               awful.client.focus.byidx(-1)
                                           end))
 
-batwidget = wibox.widget.progressbar()
+local batwidget = wibox.widget.progressbar()
 
--- Create wibox with batwidget
-batbox = wibox.layout.margin(
-    wibox.widget{ { max_value = 1, widget = batwidget,
-                    border_width = 0.5, border_color = "#000000",
-                    color = { type = "linear",
-                              from = { 0, 0 },
-                              to = { 0, 30 },
-                              stops = { { 0, "#AECF96" },
-                                        { 1, "#FF5656" } } } },
-                  forced_height = 10, forced_width = 8,
-                  direction = 'east', color = beautiful.fg_widget,
-                  layout = wibox.container.rotate },
-    1, 1, 3, 3)
+local function get_battery_markup(widget, args)
+    -- args[2] contains the battery percentage
+    local percentage = tonumber(args[2])
+    local color
+    if percentage >= 75 then
+        color = "#00FF00"  -- Green for high battery
+    elseif percentage >= 50 then
+        color = "#FFFF00"  -- Yellow for medium battery
+    elseif percentage >= 30 then
+        color = "#FF8000"  -- Orange for low battery
+    else
+        color = "#FF0000"  -- Red for very low battery
+    end
+    return string.format('<span foreground="%s">%d%%</span>', color, percentage)
+end
 
--- Register battery widget
-vicious.register(batwidget, vicious.widgets.bat, "$2", 61, "BAT0")
+local battext = wibox.widget.textbox()
+vicious.register(
+  battext, 
+  vicious.widgets.bat, 
+  get_battery_markup,
+  61, 
+  "BAT0"
+)
 
 --local function set_wallpaper(s)
 --    -- Wallpaper
@@ -231,6 +239,7 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
+            battext,
             mykeyboardlayout,
             wibox.widget.systray(),
             mytextclock,
