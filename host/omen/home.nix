@@ -104,7 +104,7 @@
     };
   };
 
-  scripts.rebuild-nix.enable = true; # custom
+  scripts.rebuild-nix.enable = false; # custom
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
