@@ -2,11 +2,11 @@
   config,
   pkgs,
   ...
-}: let
-  nixConfigRoot = "../..";
-in {
+}:
+{
   imports = [
     ../../modules/scripts/rebuild.nix
+    ../../modules/windowManagers/awesome/awesome.nix
   ];
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -60,7 +60,6 @@ in {
 
   xdg.configFile = {
     "nvim".source = ../../modules/terminalPrograms/nvim;
-    "awesome".source = ../../modules/windowManagers/awesome;
   };
 
   # Home Manager can also manage your environment variables through
@@ -96,6 +95,8 @@ in {
     };
 
     fish.enable = true;
+
+    awesome.myconfig = true; # custom
   };
 
   services = {
@@ -104,7 +105,7 @@ in {
     };
   };
 
-  scripts.rebuild-nix.enable = true;
+  scripts.rebuild-nix.enable = true; # custom
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
