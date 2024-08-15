@@ -146,7 +146,6 @@
     packages = with pkgs; [
       #  thunderbird
       vscode
-      flutter
       android-studio
       android-udev-rules
       alejandra
