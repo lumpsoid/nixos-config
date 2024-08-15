@@ -39,6 +39,7 @@
   services.xserver.enable = true;
   services.xserver.displayManager.sessionCommands = ''
     xset r rate 300 30
+    ssh-add ~/.ssh/id_ssh_git
   '';
 
   # Enable the Enlightenment Desktop Environment.
