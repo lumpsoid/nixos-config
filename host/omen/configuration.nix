@@ -200,6 +200,7 @@
     lazygit
     xclip
     ranger
+    zip
     unzip
     keepassxc
     rsync
