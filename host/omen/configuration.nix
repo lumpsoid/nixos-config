@@ -125,7 +125,7 @@
   fonts = {
     fontDir.enable = true;
     packages = with pkgs; [
-      _0xproto
+      (pkgs.nerdfonts.override { fonts = [ "0xProto" ]; })
       noto-fonts-emoji
     ];
     fontconfig = {
