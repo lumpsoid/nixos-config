@@ -1,7 +1,11 @@
-{pkgs, lib, config, ... }: 
 {
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
   options = {
-    programs.awesome.myconfig = 
+    programs.awesome.myconfig =
       lib.mkEnableOption "enable my custom config";
   };
 
