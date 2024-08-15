@@ -59,9 +59,8 @@
   };
 
   # ~/.config
-  xdg.configFile = {
-    "nvim".source = ../../modules/terminalPrograms/nvim;
-  };
+  #xdg.configFile = {
+  #};
 
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a

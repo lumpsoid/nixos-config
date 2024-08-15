@@ -11,6 +11,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.default
+    ./nixvim.nix
   ];
   # Bootloader.
   boot.kernelParams = ["psmouse.elantech_smbus=0"];
@@ -189,7 +190,6 @@
     libnotify
     xdg-desktop-portal
     lxqt.lxqt-policykit
-    neovim
     sxiv
     mpv
     tldr
