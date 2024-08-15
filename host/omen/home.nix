@@ -2,8 +2,7 @@
   config,
   pkgs,
   ...
-}:
-{
+}: {
   imports = [
     ../../modules/scripts/rebuild.nix
     ../../modules/windowManagers/awesome/awesome.nix

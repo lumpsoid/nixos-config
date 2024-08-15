@@ -127,7 +127,7 @@
   fonts = {
     fontDir.enable = true;
     packages = with pkgs; [
-      (nerdfonts.override { fonts = [ "0xProto" ]; })
+      (nerdfonts.override {fonts = ["0xProto"];})
     ];
     fontconfig = {
       enable = true;

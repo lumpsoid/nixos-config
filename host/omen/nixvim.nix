@@ -2,8 +2,7 @@
   pkgs,
   config,
   ...
-}:
-{
+}: {
   programs.nixvim = {
     enable = true;
     # We can set the leader key:
@@ -22,25 +21,28 @@
       termguicolors = true;
 
       number = true;
-      relativenumber = true;
+      #relativenumber = true;
     };
-    
+
     autoCmd = [
       {
         event = "FileType";
         pattern = "markdown";
-        callback =  { __raw = ''
-          function()
-            vim.cmd([[
-              set awa
-              set com=b:-,n:>
-              set formatoptions+=ro
-            ]])
-          end
-        ''; };
+        callback = {
+          __raw = ''
+            function()
+              vim.cmd([[
+                set awa
+                set com=b:-,n:>
+                set formatoptions+=ro
+              ]])
+            end
+          '';
+        };
       }
-      { # as example for future
-        event = [ "BufWritePost" ];
+      {
+        # as example for future
+        event = ["BufWritePost"];
         pattern = "/home/qq/dotfiles/*";
         command = "!cd /home/qq/dotfiles; stow .";
       }
@@ -75,8 +77,8 @@
       cmp-buffer.enable = true;
       luasnip = {
         enable = true;
-        fromVscode = [ 
-          {} 
+        fromVscode = [
+          {}
           # { path = ./snippets; } # for the future
         ];
       };
@@ -101,7 +103,7 @@
       # lsp
       lsp = {
         capabilities.__raw = ''
-           require('cmp_nvim_lsp').default_capabilities()
+          require('cmp_nvim_lsp').default_capabilities()
         '';
         keymaps = {
           diagnostic = {
@@ -126,7 +128,7 @@
 
           lua-ls = {
             enable = true;
-            filetypes = [ "lua" ];
+            filetypes = ["lua"];
           };
         };
       };
