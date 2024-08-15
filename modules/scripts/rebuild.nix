@@ -62,10 +62,6 @@ in {
                   exit 0
               fi
 
-              # Autoformat your nix files
-              alejandra . &>/dev/null \
-                || ( alejandra . ; echo "formatting failed!" && exit 1)
-
               # Shows your changes
               git diff -U0 '*.nix'
 
@@ -74,7 +70,13 @@ in {
               # Rebuild, output simplified errors, log trackebacks
               # sudo nixos-rebuild switch --flake .#omen &>nixos-switch.log || (cat nixos-switch.log | grep --color error && exit 1)
               # ${rebuildCmd} 2>&1 | tee nixos-switch.log | grep --color error || exit 1
+              echo "we are here"
               sudo ${rebuildCmd} 2>&1 | tee ./nixos-switch.log | tee /dev/null || (grep --color error ./nixos-switch.log && exit 1)
+
+              # Autoformat your nix files
+              alejandra . &>/dev/null \
+                || ( alejandra . ; echo "formatting failed!" && exit 1)
+
 
               # Get current generation metadata
               current=$(nixos-rebuild list-generations | grep current)
