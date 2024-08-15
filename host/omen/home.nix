@@ -58,6 +58,7 @@
     # '';
   };
 
+  # ~/.config
   xdg.configFile = {
     "nvim".source = ../../modules/terminalPrograms/nvim;
   };
