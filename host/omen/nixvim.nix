@@ -69,9 +69,28 @@
 
       oil.enable = true;
 
-      treesitter.enable = true;
+      treesitter = {
+        enable = true;
+        settings = {
+          auto_install = true;
+          ensure_installed = [
+            "markdown"
+            "lua"
+            "go"
+            "dart"
+          ];
+          indent = {
+            enable = true;
+          };
+          highlight = { 
+            enable = true;
+            additional_vim_regex_highlighting = false;
+          };
+        };
+      };
 
       # completion
+      cmp-nvim-lsp.enable = true;
       cmp-nvim-lua.enable = true;
       cmp-path.enable = true;
       cmp-buffer.enable = true;
@@ -97,38 +116,56 @@
               require('luasnip').lsp_expand(args.body)
             end
           '';
+          mapping = {
+            "<Tab>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
+            "<C-j>" = "cmp.mapping.select_next_item()";
+            "<C-k>" = "cmp.mapping.select_prev_item()";
+            "<C-e>" = "cmp.mapping.abort()";
+            "<C-b>" = "cmp.mapping.scroll_docs(-4)";
+            "<C-f>" = "cmp.mapping.scroll_docs(4)";
+            "<C-Space>" = "cmp.mapping.complete()";
+            "<CR>" = "cmp.mapping.confirm({ select = true })";
+            "<S-CR>" = "cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })";
+          };
         };
       };
 
       # lsp
       lsp = {
-        capabilities.__raw = ''
-          require('cmp_nvim_lsp').default_capabilities()
-        '';
+        enable = true;
+
         keymaps = {
-          diagnostic = {
-            "gn" = "goto_next";
-            "gp" = "goto_prev";
-          };
+          #diagnostic = {
+          #  "gn" = "goto_next";
+          #  "gp" = "goto_prev";
+          #};
           lspBuf = {
-            K = "hower";
-            gD = "references";
-            gd = "definition";
-            gi = "implementation";
-            gt = "type_definition";
+            "K" = "hover";
+            "gD" = "references";
+            "gd" = "definition";
+            "gi" = "implementation";
+            "gt" = "type_definition";
           };
         };
         servers = {
           gopls = {
             enable = true;
-            filetypes = [
-              "go"
-            ];
+            filetypes = [ "go" ];
           };
 
           lua-ls = {
             enable = true;
             filetypes = ["lua"];
+          };
+
+          dartls = {
+            enable = true;
+            filetypes = ["dart"];
+          };
+
+          tsserver = {
+            enable = true;
+            filetypes = [ "js" "ts" ];
           };
         };
       };
