@@ -6,8 +6,7 @@
   imports = [
     ../../modules/scripts/rebuild.nix
     ../../modules/windowManagers/awesome/awesome.nix
-  ];
-  # Home Manager needs a bit of information about you and the paths it should
+  ]; # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "qq";
   home.homeDirectory = "/home/qq";
