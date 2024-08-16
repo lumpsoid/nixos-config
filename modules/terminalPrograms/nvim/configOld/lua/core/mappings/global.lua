@@ -13,8 +13,8 @@ wk.add({
     {
       group = "clipboard",
       { "<leader>y", '"+yy', desc = "Yank to clipboard" },
-      { "<leader>y", '"+y', mode = "v",                  desc = "Yank to clipboard" },
-      { "<leader>p", '"+p', desc = "Past from clipboard" },
+      { "<leader>y", '"+y',  desc = "Yank to clipboard", mode = "v", },
+      { "<leader>p", '"+p',  desc = "Past from clipboard" },
     },
     {
       group = "tabs",
@@ -26,7 +26,7 @@ wk.add({
     {
       group = "hop",
       { "<leader>gc", "<cmd>HopChar1MW<CR>", desc = "1 char hop" },
-      { ",j", ":HopLineMW", desc = "two way line" },
+      { ",j",         ":HopLineMW",          desc = "two way line" },
       { "<leader>gl", "<cmd>lua require('core.hop-custom').hint_wikilink_follow()<CR>", desc = "two way line" },
     },
     {
