@@ -20,11 +20,6 @@ require("awful.hotkeys_popup.keys")
 -- vicious additional widgets
 local vicious = require("vicious")
 
-beautiful.init({
-  font = '0xProto Nerd Font',
-  border_focus = '#FFA500' -- orange
-})
-
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -53,6 +48,8 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+beautiful.font = '0xProto Nerd Font'
+beautiful.border_focus = '#FFA500'
 
 -- This is used later as the default terminal and editor to run.
 local terminal = "xterm"
