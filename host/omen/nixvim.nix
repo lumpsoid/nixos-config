@@ -48,9 +48,12 @@
       }
     ];
 
+
     extraFiles = {
       # path             source lua code file
-      #"custom_functions".source = "";
+      "lua/custom_functions.lua".source = ../../modules/terminalPrograms/nvim/custom_functions.lua;
+      "lua/functions_fzf_lua.lua".source = ../../modules/terminalPrograms/nvim/functions_fzf_lua.lua;
+      "lua/custom_hop.lua".source = ../../modules/terminalPrograms/nvim/hop-custom.lua;
     };
 
     colorschemes.catppuccin = {
@@ -115,15 +118,107 @@
           silent = true;
         };
       }      
+      {
+        mode = "n";
+        key = "<leader>fo";
+        action = "<cmd>lua require('functions_fzf_lua').openFile()<CR>";
+        options = {
+          desc = "fuzzy find and open note";
+          silent = true;
+        };
+      }      
     ];
 
     files = {
+      # example
+      #"lua/crdo/init.lua".extraConfigLua = builtins.readFile ./crdo.lua;
       "ftplugin/markdown.lua" = {
         keymaps = [
           {
+            mode = [ "n" "i" ];
+            key = "<C-k>";
+            action = "<cmd>lua require('functions_fzf_lua').insertId()<CR>";
+            options = {
+              desc = "for any note [[ID]] insert";
+              silent = true;
+            };
+          }      
+          {
+            mode = [ "n" "i" ];
+            key = "<C-q>";
+            action = "<cmd>lua require('functions_fzf_lua').insertHeadId()<CR>";
+            options = {
+              desc = "tree note [[ID]] insert";
+              silent = true;
+            };
+          }      
+          {
             mode = "n";
-            key = "<leader>gh";
-            action = "<cmd>e index.md<CR>";
+            key = "<leader>nb";
+            action = "<cmd>lua require('functions_fzf_lua').backlinks()<cr>";
+            options = {
+              desc = "find backlinks to open note";
+              silent = true;
+            };
+          }      
+          {
+            mode = ["i" "n"];
+            key = "<C-y>";
+            action = "<esc>:lua require('custom_functions').createID()<cr>jjA";
+            options = {
+              desc = "create new zettel file";
+              silent = true;
+            };
+          }      
+          {
+            mode = "n";
+            key = "<leader>na";
+            action = "<cmd>lua require('functions_fzf_lua').findAroundNote()<CR>";
+            options = {
+              desc = "view notes which was created in the same date as current note";
+              silent = true;
+            };
+          }      
+          {
+            mode = "n";
+            key = "<leader>nd";
+            action = "<cmd>lua require('custom_functions').delCurrentFile()<CR>";
+            options = {
+              desc = "delete current file";
+              silent = true;
+            };
+          }      
+          {
+            mode = "n";
+            key = "<leader>nc";
+            action = "<cmd>lua require('custom_functions').currentLink()<CR>";
+            options = {
+              desc = "copy link to current file";
+              silent = true;
+            };
+          }      
+          {
+            mode = "n";
+            key = "<leader>nl";
+            action = "<cmd>lua require('functions_fzf_lua').listOfNotes()<CR>";
+            options = {
+              desc = "list all notes in reverse order";
+              silent = true;
+            };
+          }      
+          {
+            mode = "n";
+            key = "<leader>nf";
+            action = "<esc>:MkdnEnter<cr>:lua require('custom_functions').currentLink()<CR>:MkdnGoBack<cr>o<esc>cc- <c-r>+<esc>kdd";
+            options = {
+              desc = "change just ID to H1 ID";
+              silent = true;
+            };
+          }      
+          {
+            mode = "n";
+            key = "gh";
+            action = "<esc>:e index.md<CR>";
             options = {
               desc = "go home";
               silent = true;

@@ -1,4 +1,4 @@
-local cf = require("core.custom_functions")
+local cf = require("custom_functions")
 
 local M = {}
 function M.backlinks()
