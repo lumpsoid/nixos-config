@@ -5,6 +5,7 @@
 }: {
   imports = [
     ../../modules/scripts/rebuild.nix
+    ../../modules/scripts/devshellkeep.nix
     ../../modules/windowManagers/awesome/awesome.nix
   ]; # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -105,7 +106,10 @@
     };
   };
 
-  scripts.rebuild-nix.enable = false; # custom
+  scripts = {
+    rebuild-nix.enable = false; # custom
+    devshellnix.enable = true; # custom
+  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
