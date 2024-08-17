@@ -14,7 +14,7 @@
     ./nixvim.nix
   ];
   # Bootloader.
-  boot.kernelParams = ["psmouse.elantech_smbus=0"];
+  #boot.kernelParams = ["psmouse.elantech_smbus=0"];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -176,6 +176,11 @@
     };
     ssh.startAgent = true;
     dconf.enable = true;
+
+    tmux = {
+      enable = true;
+      escapeTime = 10;
+    };
   };
 
   # Allow unfree packages
