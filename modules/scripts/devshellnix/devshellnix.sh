@@ -53,8 +53,11 @@ get_devshell_name() {
 }
 
 get_flake_source_path() {
+  local flake_dir="$1"
   local flake_source_path
-  flake_source_path=$(nix flake metadata | grep Path |  cut -d '/' -f 4)
+
+  check_path_exists "$flake_dir/flake.nix"
+  flake_source_path=$(nix flake metadata "$flake_dir" | grep Path |  cut -d '/' -f 4)
 
   is_empty "flake_source_path"
   echo "$flake_source_path"
@@ -113,7 +116,7 @@ case "$action" in
     # filePaths are empty
     is_empty "file_paths"
 
-    flake_source_path=$(get_flake_source_path)
+    flake_source_path=$(get_flake_source_path "$flake_dir")
 
     # append flake_source_path to the file_paths
     file_paths=$(echo "$file_paths"; echo "$flake_source_path")

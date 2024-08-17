@@ -5,7 +5,7 @@
 }: {
   imports = [
     ../../modules/scripts/rebuild.nix
-    ../../modules/scripts/devshellkeep.nix
+    ../../modules/scripts/devshellnix/devshellnix.nix
     ../../modules/windowManagers/awesome/awesome.nix
   ]; # Home Manager needs a bit of information about you and the paths it should
   # manage.

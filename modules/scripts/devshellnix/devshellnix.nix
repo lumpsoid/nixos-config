@@ -12,7 +12,7 @@
 
   config = lib.mkIf config.scripts.devshellnix.enable {
     home.packages = [
-      ( pkgs.writeShellScriptBin "devshellnix" (builtins.readFile ./devshellkeep.sh) )
+      ( pkgs.writeShellScriptBin "devshellnix" (builtins.readFile ./devshellnix.sh) )
     ];
   };
 }
