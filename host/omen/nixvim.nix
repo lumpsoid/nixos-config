@@ -127,6 +127,15 @@
           silent = true;
         };
       }      
+      {
+        mode = "n";
+        key = "<leader>gs";
+        action = "<cmd>lua require('fzf-lua').lsp_document_symbols()<CR>";
+        options = {
+          desc = "lsp document symbols";
+          silent = true;
+        };
+      }      
     ];
 
     files = {
@@ -369,16 +378,20 @@
         enable = true;
 
         keymaps = {
-          #diagnostic = {
-          #  "gn" = "goto_next";
-          #  "gp" = "goto_prev";
-          #};
+          diagnostic = {
+            "<leader>e" = "open_float";
+            "gn" = "goto_next";
+            "gp" = "goto_prev";
+          };
           lspBuf = {
             "K" = "hover";
             "gD" = "references";
             "gd" = "definition";
             "gi" = "implementation";
             "gt" = "type_definition";
+            "gr" = "rename";
+            "<leader>cf" = "format";
+            "<leader>ca" = "code_action";
           };
         };
         servers = {
@@ -390,6 +403,11 @@
           lua-ls = {
             enable = true;
             filetypes = ["lua"];
+          };
+
+          bashls = {
+            enable = true;
+            filetypes = ["bash" "sh"];
           };
 
           dartls = {
