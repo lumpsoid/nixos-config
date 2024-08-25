@@ -244,6 +244,7 @@
     ps_mem
     gimp
     fend
+    trashy
   ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
