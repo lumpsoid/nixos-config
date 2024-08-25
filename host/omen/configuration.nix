@@ -177,7 +177,6 @@
     packages = with pkgs; [
       #  thunderbird
       vscode
-      android-studio
       android-udev-rules
       alejandra
     ];
