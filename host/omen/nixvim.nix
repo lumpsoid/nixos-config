@@ -417,7 +417,7 @@
 
           tsserver = {
             enable = true;
-            filetypes = [ "js" "ts" ];
+            filetypes = [ "javascript" "typescript" ];
           };
         };
       };
