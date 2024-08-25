@@ -24,6 +24,13 @@
       #relativenumber = true;
     };
 
+    extraConfigLua = ''
+      vim.cmd.highlight({"Cursor", "guibg=#5f87af", "ctermbg=67"})
+      vim.cmd.highlight({"iCursor", "guibg=#ffffaf", "ctermbg=229"})
+      vim.cmd.highlight({"rCursor", "guibg=#d70000", "ctermbg=124"})
+      vim.o.guicursor = 'n-v-c:block-Cursor/lCursor,i-ci-ve:ver100-iCursor,r-cr:block-rCursor,o:hor50-Cursor/lCursor,sm:block-iCursor,a:blinkwait1000-blinkon500-blinkoff250'
+    '';
+
     autoCmd = [
       {
         event = "FileType";
