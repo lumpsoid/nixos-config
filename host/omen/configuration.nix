@@ -212,6 +212,7 @@
       enable = true;
       escapeTime = 10;
     };
+    appimage.binfmt = true;
   };
 
   # Allow unfree packages
