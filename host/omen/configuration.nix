@@ -243,6 +243,7 @@
     rsync
     ps_mem
     gimp
+    fend
   ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
