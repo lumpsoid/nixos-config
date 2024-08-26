@@ -12,6 +12,7 @@
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.default
     ./nixvim.nix
+    ../../modules/windowManagers/hyprland/default.nix
   ];
   # Bootloader.
   #boot.kernelParams = ["psmouse.elantech_smbus=0"];
@@ -191,6 +192,8 @@
     daemon.settings.data-root = "/home/qq/Documents/programming/docker/data/";
   };
 
+  module.windowManager.hyprland.enable = true;
+
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
@@ -215,6 +218,17 @@
       escapeTime = 10;
     };
     appimage.binfmt = true;
+    hyprland = {
+      enable = true;
+      package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+    };
+  };
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+    ];
   };
 
   # Allow unfree packages
@@ -226,7 +240,6 @@
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
     libnotify
-    xdg-desktop-portal
     lxqt.lxqt-policykit
     sxiv
     mpv
