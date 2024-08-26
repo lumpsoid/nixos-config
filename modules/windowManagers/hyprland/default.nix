@@ -88,6 +88,15 @@ in
             force_zero_scaling = true;
           };
 
+          general = {
+            layout = "master";
+          };
+
+          master = {
+            new_status = "master";
+            #new_on_top = true;
+          };
+
           misc = {
             enable_swallow = true;
             # The window class regex
@@ -117,7 +126,7 @@ in
             "$mod, D, exec, rofi -show drun -show-icons"
             "$mod, W, exec, ${browser}"
             "$mod, Return, exec, ${terminal}"
-            "$mod, Space, swapwindow, l"
+            "$mod, Space, layoutmsg, swapwithmaster master"
             "$mod CTRL, Space, togglefloating"
             "$mod, F, fullscreen"
             
