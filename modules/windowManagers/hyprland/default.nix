@@ -78,6 +78,7 @@ in
             "${pkgs.waybar}/bin/waybar"
             "${pkgs.lxqt.lxqt-policykit}/bin/lxqt-policykit-agent"
             "${pkgs.foot}/bin/foot --server"
+            "ssh-add /home/qq/.ssh/id_ssh_git"
           ];
 
           monitor = ", highres, auto, 1.0";
