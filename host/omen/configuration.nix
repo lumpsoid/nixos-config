@@ -43,12 +43,16 @@
   '';
 
   # Enable the Enlightenment Desktop Environment.
-  services.xserver.displayManager.lightdm.enable = true;
+  #services.xserver.displayManager.lightdm.enable = true;
   services.xserver.windowManager.awesome = {
     enable = true;
     luaModules = with pkgs.luaPackages; [
       vicious
     ];
+  };
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
   };
 
   # Enable acpid
