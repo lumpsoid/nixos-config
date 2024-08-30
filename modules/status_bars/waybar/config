@@ -208,7 +208,7 @@
 		"menu-actions": {
 			"shutdown": "shutdown",
 			"reboot": "reboot",
-			//"suspend": "systemctl suspend",
+			"suspend": "systemctl suspend",
 			"hibernate": "systemctl hibernate"
 		}
     }

@@ -21,6 +21,7 @@ in
       ];
 
       xdg.configFile."waybar/config".source = ./config;
+      xdg.configFile."waybar/power_menu.xml".source = ./power_menu.xml;
     };
   };
 }
