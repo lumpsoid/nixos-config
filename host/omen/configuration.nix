@@ -261,6 +261,7 @@
     fend
     trashy
     appimage-run
+    jq
   ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
