@@ -57,6 +57,7 @@ in
         # screenshot
         grim
         slurp
+        imv # image viewer for wayland
 
         wlprop # to get window class
       ];
