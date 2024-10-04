@@ -5,20 +5,11 @@ local mkdnflow_links = require('mkdnflow.links')
 local M = {}
 
 function M.hint_wikilink_follow()
-  local opts = {
-    keys = 'asdghklqwertyuiopzxcvbnmfj',
-    multi_windows = true,
-  }
-
   hop.hint_with_regex(
-    jump_regex.regex_by_case_searching("[[", true, opts),
-    opts,
+    jump_regex.regex_by_case_searching("[[", true, hop.opts),
+    hop.opts,
     function(jt)
-      hop.move_cursor_to(
-        jt.window,
-        jt.line + 1,
-        jt.column - 1, opts.hint_offset, opts.direction
-      )
+      hop.move_cursor_to(jt, hop.opts)
       mkdnflow_links.followLink()
     end
   )
