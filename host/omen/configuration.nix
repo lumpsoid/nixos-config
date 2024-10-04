@@ -180,7 +180,7 @@
     shell = pkgs.fish;
     packages = with pkgs; [
       #  thunderbird
-      vscode
+      vscodium
       android-udev-rules
       alejandra
     ];
