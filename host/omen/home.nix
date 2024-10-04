@@ -27,7 +27,7 @@
     #badwolf
     bat
     meld
-    chromium
+    ungoogled-chromium
     broot
     joshuto
     localsend
