@@ -28,7 +28,10 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
-  services.connman.enable = true;
+  #services.connman.enable = true;
+  networking.networkmanager.enable = true;
+
+  services.blueman.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Belgrade";
