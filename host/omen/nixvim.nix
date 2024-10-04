@@ -264,6 +264,10 @@
         };
       };
 
+      hop = {
+        enable = true;
+      };
+
       mkdnflow = {
         enable = true;
         createDirs = false;
