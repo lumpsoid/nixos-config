@@ -246,6 +246,7 @@
 
     plugins = {
 
+      web-devicons.enable = true;
       bufferline = {
         enable = true;
       };
@@ -422,7 +423,7 @@
             filetypes = ["dart"];
           };
 
-          tsserver = {
+          ts-ls = {
             enable = true;
             filetypes = [ "javascript" "typescript" ];
           };
