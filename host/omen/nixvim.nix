@@ -240,6 +240,15 @@
               silent = true;
             };
           }      
+          {
+            mode = "n";
+            key = "<leader>jt";
+            action = "<cmd>lua require('custom_functions').openJournal()<CR>";
+            options = {
+              desc = "open journal today";
+              silent = true;
+            };
+          }      
         ];
       };
     };
