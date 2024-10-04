@@ -74,8 +74,8 @@ in
         settings = {
           exec-once = [
             "${pkgs.mako}/bin/mako"
-            "${pkgs.swww}/bin/swww-daemon"
-            "${pkgs.swww}/bin/swww img /home/qq/Pictures/wallpaper/sad-loli.jpg"
+              #"${pkgs.swww}/bin/swww-daemon" # wallpaper
+              #"${pkgs.swww}/bin/swww img /home/qq/Pictures/wallpaper/sad-loli.jpg"
             "${pkgs.waybar}/bin/waybar"
             "${pkgs.lxqt.lxqt-policykit}/bin/lxqt-policykit-agent"
             "${pkgs.foot}/bin/foot --server"
