@@ -13,6 +13,7 @@
     inputs.home-manager.nixosModules.default
     ./nixvim.nix
     ../../modules/windowManagers/hyprland/default.nix
+    ../../modules/windowManagers/awesome/default.nix
   ];
   # Bootloader.
   #boot.kernelParams = ["psmouse.elantech_smbus=0"];
@@ -39,21 +40,8 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.displayManager.sessionCommands = ''
-    xset r rate 300 30
-    ssh-add ~/.ssh/id_ssh_git
-  '';
-
   # Enable the Enlightenment Desktop Environment.
   #services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.windowManager.awesome = {
-    enable = true;
-    luaModules = with pkgs.luaPackages; [
-      vicious
-    ];
-  };
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
@@ -111,13 +99,6 @@
     };
   };
 
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us,ru";
-    variant = ",typewriter";
-    options = "grp:caps_toggle";
-  };
-
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
@@ -145,7 +126,7 @@
   services.xserver.videoDrivers = ["amdgpu" "nvidia"];
   hardware.nvidia = {
     modesetting.enable = true;
-    powerManagement.enable = false;
+    powerManagement.enable = true;
     powerManagement.finegrained = true;
     open = false;
     nvidiaSettings = true;
@@ -158,9 +139,6 @@
       amdgpuBusId = "PCI:7:0:0";
     };
   };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
 
   fonts = {
     fontDir.enable = true;
@@ -195,7 +173,12 @@
     daemon.settings.data-root = "/home/qq/Documents/programming/docker/data/";
   };
 
-  module.windowManager.hyprland.enable = true;
+  module = {
+    windowManager = {
+      #hyprland.enable = true;
+      awesome.enable = true;
+    };
+  };
 
   home-manager = {
     useGlobalPkgs = true;
@@ -206,8 +189,8 @@
     };
   };
 
-  # Install firefox.
   programs = {
+    # Install firefox.
     firefox.enable = true;
     light.enable = true;
     nix-ld = {
@@ -221,10 +204,6 @@
       escapeTime = 10;
     };
     appimage.binfmt = true;
-    hyprland = {
-      enable = true;
-      package = inputs.hyprland.packages."${pkgs.system}".hyprland;
-    };
   };
 
   xdg.portal = {

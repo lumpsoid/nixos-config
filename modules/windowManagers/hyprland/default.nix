@@ -22,6 +22,11 @@ in
 
   config = lib.mkIf cfg.enable {
 
+    programs.hyprland = {
+      enable = true;
+      package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+    };
+
     environment.sessionVariables = {
       #If your cursor becomes invisible
       #WLR_NO_HARDWARE_CURSORS = "1";
