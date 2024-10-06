@@ -6,7 +6,6 @@
   imports = [
     ../../modules/scripts/rebuild.nix
     ../../modules/scripts/devshellnix/devshellnix.nix
-    ../../modules/windowManagers/awesome/awesome.nix
   ]; # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "qq";
@@ -103,8 +102,6 @@
     };
 
     fish.enable = true;
-
-    awesome.myconfig = true; # custom
   };
 
   services = {
