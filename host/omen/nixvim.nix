@@ -178,6 +178,15 @@
             };
           }      
           {
+            mode = ["n"];
+            key = "<TAB>";
+            action = "<esc>:lua require('custom_hop').hint_wikilink_follow()<cr>";
+            options = {
+              desc = "follow wikilink";
+              silent = true;
+            };
+          }      
+          {
             mode = ["i" "n"];
             key = "<C-y>";
             action = "<esc>:lua require('custom_functions').createID()<cr>jjA";
