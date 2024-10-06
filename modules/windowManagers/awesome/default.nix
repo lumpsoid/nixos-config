@@ -29,6 +29,8 @@ in
       ];
     };
 
-    xdg.configFile."awesome/rc.lua".source = ./rc.lua;
+    home-manager.users."qq" = {
+      xdg.configFile."awesome/rc.lua".source = ./rc.lua;
+    };
   };
 }
