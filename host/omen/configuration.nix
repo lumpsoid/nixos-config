@@ -11,7 +11,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.default
-    ./nixvim.nix
+    ../../modules/terminal_programs/nvim/nixvim.nix
     ../../modules/windowManagers/hyprland/default.nix
     ../../modules/windowManagers/awesome/default.nix
   ];

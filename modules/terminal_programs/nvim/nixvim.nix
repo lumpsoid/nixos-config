@@ -58,9 +58,9 @@
 
     extraFiles = {
       # path             source lua code file
-      "lua/custom_functions.lua".source = ../../modules/terminalPrograms/nvim/custom_functions.lua;
-      "lua/functions_fzf_lua.lua".source = ../../modules/terminalPrograms/nvim/functions_fzf_lua.lua;
-      "lua/custom_hop.lua".source = ../../modules/terminalPrograms/nvim/hop-custom.lua;
+      "lua/custom_functions.lua".source = ./custom_functions.lua;
+      "lua/functions_fzf_lua.lua".source = ./functions_fzf_lua.lua;
+      "lua/custom_hop.lua".source = ./hop-custom.lua;
     };
 
     colorschemes.catppuccin = {
@@ -371,7 +371,7 @@
         enable = true;
         fromVscode = [
           {}
-          # { path = ./snippets; } # for the future
+          { path = ../../gui_apps/vscode/snippets; }
         ];
       };
       cmp = {
