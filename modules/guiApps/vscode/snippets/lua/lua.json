@@ -1,0 +1,7 @@
+{
+  "myrequire": {
+      "prefix": "req1",
+      "body": ["require(\"${1:module}\")"],
+      "description": "Require module"
+  }
+}

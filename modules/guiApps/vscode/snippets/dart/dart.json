@@ -1,0 +1,86 @@
+{
+  "My StatelessWidget": {
+    "prefix": "slclass",
+    "body": [
+      "class ${1:ClassName} extends StatelessWidget {",
+      "  const ${1}({super.key});",
+      "",
+      "  @override",
+      "  Widget build(BuildContext context) {",
+      "    ${2:return Text(); // TODO: implement build}",
+      "  }",
+      "}"
+    ],
+    "description": "Create a StatelessWidget with constructor and build method"
+  }, 
+  "My StatefullWidget": {
+    "prefix": "sfclass",
+    "body": [
+      "class ${1:ClassName} extends StatefulWidget {",
+      "  const ${1}({super.key});",
+      "",
+      "  @override",
+      "  State<${1}> createState() => ${2:StateName}();",
+      "}",
+      "",
+      "class ${2} extends State<${1}> {",
+      "",
+      "  @override",
+      "  void initState() {",
+      "    super.initState();",
+      "  }",
+      "",
+      "  @override",
+      "  void dispose() {",
+      "    super.dispose();",
+      "  }",
+      "",
+      "  @override",
+      "  Widget build(BuildContext context) {",
+      "    return ${3:Widget} // TODO: implement build",
+      "  }",
+      "}"
+    ],
+    "description": "Create a StatelessWidget with constructor and build method"
+  }, 
+  "Bloc Event": {
+    "prefix": "bloce",
+    "body": [
+      "sealed class ${1:ClassName} extends Equatable {",
+      "  const ${1}();",
+      "",
+      "  @override",
+      "  List<Object> get props => [];",
+      "}"
+    ],
+    "description": "Create bloc event class"
+  },
+  "Bloc State Class": {
+    "prefix": "blocs",
+    "body": [
+      "enum ${1:Name}Status { initial, loading, loaded, error }",
+      "",
+      "final class ${1}State extends Equatable {",
+      "  const ${1}State({",
+      "    this.status = TicketFormStatus.initial,",
+      "  });",
+      "",
+      "  final ${1}Status status;",
+      "",
+      "  ${1}State copyWith({",
+      "    ${1}Status? status,",
+      "  }) {",
+      "    return ${1}State(",
+      "      status: status ?? this.status,",
+      "    );",
+      "  }",
+      "",
+      "  @override",
+      "  List<Object> get props => [",
+      "        status,",
+      "      ];",
+      "}"
+    ],
+    "description": "Create a TicketFormState class with Equatable"
+  }
+}
