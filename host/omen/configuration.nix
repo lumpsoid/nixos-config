@@ -164,6 +164,7 @@
       vscodium
       android-udev-rules
       alejandra
+      fossil
     ];
   };
   programs.fish.enable = true;
@@ -175,8 +176,8 @@
 
   module = {
     windowManager = {
-      #hyprland.enable = true;
-      awesome.enable = true;
+      hyprland.enable = true;
+      awesome.enable = false;
     };
   };
 
