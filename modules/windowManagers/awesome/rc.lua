@@ -50,6 +50,8 @@ end
 beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 beautiful.font = '0xProto Nerd Font'
 beautiful.border_focus = '#FFA500'
+--beautiful.wallpaper = gears.filesystem.get_xdg_data_home() .. "/Pictures/wallpaper/blue-field-butt-anime-girl.jpg"
+beautiful.wallpaper = "home/qq/Pictures/wallpaper/blue-field-butt-anime-girl.jpg"
 
 -- This is used later as the default terminal and editor to run.
 local terminal = "xterm"
@@ -155,7 +157,7 @@ local tasklist_buttons = gears.table.join(
 
 local batwidget = wibox.widget.progressbar()
 
-local function get_battery_markup(widget, args)
+local function get_battery_markup(_, args)
     -- args[2] contains the battery percentage
     local percentage = tonumber(args[2])
     local color
@@ -173,31 +175,31 @@ end
 
 local battext = wibox.widget.textbox()
 vicious.register(
-  battext, 
-  vicious.widgets.bat, 
+  battext,
+  vicious.widgets.bat,
   get_battery_markup,
-  61, 
+  61,
   "BAT0"
 )
 
---local function set_wallpaper(s)
---    -- Wallpaper
---    if beautiful.wallpaper then
---        local wallpaper = beautiful.wallpaper
---        -- If wallpaper is a function, call it with the screen
---        if type(wallpaper) == "function" then
---            wallpaper = wallpaper(s)
---        end
---        gears.wallpaper.maximized(wallpaper, s, true)
---    end
---end
+local function set_wallpaper(s)
+   -- Wallpaper
+   if beautiful.wallpaper then
+       local wallpaper = beautiful.wallpaper
+       -- If wallpaper is a function, call it with the screen
+       if type(wallpaper) == "function" then
+           wallpaper = wallpaper(s)
+       end
+       gears.wallpaper.maximized(wallpaper, s, true)
+   end
+end
 
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
---screen.connect_signal("property::geometry", set_wallpaper)
+screen.connect_signal("property::geometry", set_wallpaper)
 
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
-    --set_wallpaper(s)
+    set_wallpaper(s)
 
     -- Each screen has its own tag table.
     awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
