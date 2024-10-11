@@ -71,7 +71,7 @@ in
 
       wayland.windowManager.hyprland =
         let
-          browser = "firefox";
+          browser = "chromium";
           # how to get path here
           terminal = "foot";
         in 
