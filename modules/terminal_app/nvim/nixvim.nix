@@ -425,6 +425,18 @@
           };
         };
         servers = {
+          harper_ls = {
+            enable = true;
+
+            settings = {
+              "harper-ls" = {
+                linters = {
+                  sentence_capitalization = false;
+                };
+              };
+            };
+          };
+
           gopls = {
             enable = true;
             filetypes = [ "go" ];
