@@ -89,13 +89,15 @@ in
         enable = true;
         settings = {
           exec-once = [
-            "${pkgs.mako}/bin/mako"
               #"${pkgs.swww}/bin/swww-daemon" # wallpaper
               #"${pkgs.swww}/bin/swww img /home/qq/Pictures/wallpaper/sad-loli.jpg"
-            "${pkgs.waybar}/bin/waybar"
             "${pkgs.lxqt.lxqt-policykit}/bin/lxqt-policykit-agent"
             "${pkgs.foot}/bin/foot --server"
             "ssh-add /home/qq/.ssh/id_ssh_git"
+            "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+            "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+            "${pkgs.waybar}/bin/waybar"
+            "${pkgs.mako}/bin/mako"
           ];
 
           monitor = ", highres, auto, 1.0";
