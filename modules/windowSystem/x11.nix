@@ -18,22 +18,21 @@ in
   config = lib.mkIf cfg.enable {
 
     # Enable the X11 windowing system.
-    services.xserver.enable = true;
-    services.xserver.displayManager.sessionCommands = ''
-      xset r rate 300 30
-      ssh-add ~/.ssh/id_ssh_git
-    '';
-
-    # Enable touchpad support (enabled default in most desktopManager).
-    # services.xserver.libinput.enable = true;
-
-    # Configure keymap in X11
-    services.xserver.xkb = {
-      layout = "us,ru";
-      variant = ",typewriter";
-      options = "grp:caps_toggle";
+    services.xserver = {
+      enable = true;
+      displayManager.sessionCommands = ''
+        xset r rate 300 30
+        ssh-add ~/.ssh/id_ssh_git
+      '';
+      # Enable touchpad support (enabled default in most desktopManager).
+      #libinput.enable = true;
+      # Configure keymap in X11
+      xkb = {
+        layout = "us,ru";
+        variant = ",typewriter";
+        options = "grp:caps_toggle";
+      };
     };
-
   };
 }
 
