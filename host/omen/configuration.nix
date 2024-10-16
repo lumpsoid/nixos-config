@@ -177,7 +177,7 @@
   module = {
     windowManager = {
       hyprland.enable = true;
-      awesome.enable = false;
+      awesome.enable = true;
     };
   };
 
