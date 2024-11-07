@@ -42,10 +42,11 @@
 
   # Enable the Enlightenment Desktop Environment.
   #services.xserver.displayManager.lightdm.enable = true;
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true;
-  };
+  services.xserver.displayManager.gdm.enable = true;
+  #services.displayManager.sddm = {
+  #  enable = true;
+  #  wayland.enable = true;
+  #};
 
   # Enable acpid
   services.acpid.enable = true;
