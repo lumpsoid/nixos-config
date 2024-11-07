@@ -176,16 +176,16 @@
               desc = "find backlinks to open note";
               silent = true;
             };
-          }      
-          {
-            mode = ["n"];
-            key = "<TAB>";
-            action = "<esc>:lua require('custom_hop').hint_wikilink_follow()<cr>";
-            options = {
-              desc = "follow wikilink";
-              silent = true;
-            };
-          }      
+          }
+          # {
+          #   mode = ["n"];
+          #   key = "<TAB>";
+          #   action = "<esc>:lua require('custom_hop').hint_wikilink_follow()<cr>";
+          #   options = {
+          #     desc = "follow wikilink";
+          #     silent = true;
+          #   };
+          # }
           {
             mode = ["i" "n"];
             key = "<C-y>";
