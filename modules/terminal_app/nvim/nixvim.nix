@@ -1,8 +1,4 @@
-{
-  pkgs,
-  config,
-  ...
-}: {
+{...}: {
   programs.nixvim = {
     enable = true;
     # We can set the leader key:
@@ -55,7 +51,6 @@
       }
     ];
 
-
     extraFiles = {
       # path             source lua code file
       "lua/custom_functions.lua".source = ./custom_functions.lua;
@@ -79,7 +74,7 @@
           desc = "open file manager oil";
           silent = true;
         };
-      }      
+      }
       {
         mode = "n";
         key = "<leader>y";
@@ -88,7 +83,7 @@
           desc = "copy to the clipboard normal";
           silent = true;
         };
-      }      
+      }
       {
         mode = "v";
         key = "<leader>y";
@@ -97,16 +92,16 @@
           desc = "copy to the clipboard visual";
           silent = true;
         };
-      }      
+      }
       {
-        mode = [ "n" "v" ];
+        mode = ["n" "v"];
         key = "<leader>p";
         action = ''"+p'';
         options = {
           desc = "past from the clipboard";
           silent = true;
         };
-      }      
+      }
       {
         mode = "n";
         key = "<leader>sv";
@@ -115,7 +110,7 @@
           desc = "splite tab vertically and focus on it";
           silent = true;
         };
-      }      
+      }
       {
         mode = "n";
         key = "<leader>sh";
@@ -124,7 +119,7 @@
           desc = "splite tab horizontally and focus on it";
           silent = true;
         };
-      }      
+      }
       {
         mode = "n";
         key = "<leader>fo";
@@ -133,7 +128,7 @@
           desc = "fuzzy find and open note";
           silent = true;
         };
-      }      
+      }
       {
         mode = "n";
         key = "<leader>gs";
@@ -142,7 +137,7 @@
           desc = "lsp document symbols";
           silent = true;
         };
-      }      
+      }
     ];
 
     files = {
@@ -151,23 +146,23 @@
       "ftplugin/markdown.lua" = {
         keymaps = [
           {
-            mode = [ "n" "i" ];
+            mode = ["n" "i"];
             key = "<C-k>";
             action = "<cmd>lua require('functions_fzf_lua').insertId()<CR>";
             options = {
               desc = "for any note [[ID]] insert";
               silent = true;
             };
-          }      
+          }
           {
-            mode = [ "n" "i" ];
+            mode = ["n" "i"];
             key = "<C-q>";
             action = "<cmd>lua require('functions_fzf_lua').insertHeadId()<CR>";
             options = {
               desc = "tree note [[ID]] insert";
               silent = true;
             };
-          }      
+          }
           {
             mode = "n";
             key = "<leader>nb";
@@ -194,7 +189,7 @@
               desc = "create new zettel file";
               silent = true;
             };
-          }      
+          }
           {
             mode = "n";
             key = "<leader>na";
@@ -203,7 +198,7 @@
               desc = "view notes which was created in the same date as current note";
               silent = true;
             };
-          }      
+          }
           {
             mode = "n";
             key = "<leader>nd";
@@ -212,7 +207,7 @@
               desc = "delete current file";
               silent = true;
             };
-          }      
+          }
           {
             mode = "n";
             key = "<leader>nc";
@@ -221,7 +216,7 @@
               desc = "copy link to current file";
               silent = true;
             };
-          }      
+          }
           {
             mode = "n";
             key = "<leader>nl";
@@ -230,7 +225,7 @@
               desc = "list all notes in reverse order";
               silent = true;
             };
-          }      
+          }
           {
             mode = "n";
             key = "<leader>nf";
@@ -239,7 +234,7 @@
               desc = "change just ID to H1 ID";
               silent = true;
             };
-          }      
+          }
           {
             mode = "n";
             key = "gh";
@@ -248,7 +243,7 @@
               desc = "go home";
               silent = true;
             };
-          }      
+          }
           {
             mode = "n";
             key = "<leader>jt";
@@ -257,13 +252,12 @@
               desc = "open journal today";
               silent = true;
             };
-          }      
+          }
         ];
       };
     };
 
     plugins = {
-
       web-devicons.enable = true;
       bufferline = {
         enable = true;
@@ -273,7 +267,7 @@
 
       indent-blankline.enable = true;
 
-      oil= {
+      oil = {
         enable = true;
         settings = {
           view_options = {
@@ -355,7 +349,7 @@
           indent = {
             enable = true;
           };
-          highlight = { 
+          highlight = {
             enable = true;
             additional_vim_regex_highlighting = false;
           };
@@ -371,7 +365,7 @@
         enable = true;
         fromVscode = [
           {}
-          { paths = ../../gui_apps/vscode/snippets; }
+          {paths = ../../gui_apps/vscode/snippets;}
         ];
       };
       cmp = {
@@ -439,7 +433,7 @@
 
           gopls = {
             enable = true;
-            filetypes = [ "go" ];
+            filetypes = ["go"];
           };
 
           lua_ls = {
