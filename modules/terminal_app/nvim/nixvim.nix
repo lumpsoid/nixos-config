@@ -442,7 +442,7 @@
             filetypes = [ "go" ];
           };
 
-          lua-ls = {
+          lua_ls = {
             enable = true;
             filetypes = ["lua"];
           };
@@ -457,7 +457,7 @@
             filetypes = ["dart"];
           };
 
-          ts-ls = {
+          ts_ls = {
             enable = true;
             filetypes = [ "javascript" "typescript" ];
           };
