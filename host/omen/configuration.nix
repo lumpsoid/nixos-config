@@ -180,6 +180,7 @@
       android-udev-rules
       alejandra
       fossil
+      libreoffice-qt6
     ];
   };
   programs.fish.enable = true;
