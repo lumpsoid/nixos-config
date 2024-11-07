@@ -3,18 +3,15 @@
   lib,
   config,
   ...
-}:
-let
+}: let
   cfg = config.module.terminal.foot;
-in
-{
+in {
   options = {
     module.terminal.foot.enable =
       lib.mkEnableOption "enable my custom foot module";
   };
 
   config = lib.mkIf cfg.enable {
-    
     home-manager.users."qq" = {
       home.packages = with pkgs; [
         waybar
@@ -26,4 +23,3 @@ in
     };
   };
 }
-

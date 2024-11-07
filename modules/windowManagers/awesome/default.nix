@@ -3,11 +3,9 @@
   lib,
   config,
   ...
-}: 
-let 
+}: let
   cfg = config.module.windowManager.awesome;
-in
-{
+in {
   imports = [
     ../../windowSystem/x11.nix
   ];

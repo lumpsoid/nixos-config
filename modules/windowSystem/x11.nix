@@ -1,13 +1,10 @@
 {
-  pkgs,
   lib,
   config,
   ...
-}: 
-let 
+}: let
   cfg = config.module.windowSystem.x11;
-in
-{
+in {
   options = {
     module.windowSystem.x11 = {
       enable =
@@ -16,7 +13,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-
     # Enable the X11 windowing system.
     services.xserver = {
       enable = true;
@@ -35,4 +31,3 @@ in
     };
   };
 }
-

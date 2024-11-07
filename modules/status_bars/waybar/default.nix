@@ -3,18 +3,15 @@
   lib,
   config,
   ...
-}:
-let
+}: let
   cfg = config.module.status-bar.waybar;
-in
-{
+in {
   options = {
     module.status-bar.waybar.enable =
       lib.mkEnableOption "enable my custom waybar config";
   };
 
   config = lib.mkIf cfg.enable {
-    
     home-manager.users."qq" = {
       home.packages = with pkgs; [
         waybar
@@ -26,4 +23,3 @@ in
     };
   };
 }
-
