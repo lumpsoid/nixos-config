@@ -459,7 +459,14 @@
 
           ts_ls = {
             enable = true;
-            filetypes = [ "javascript" "typescript" ];
+            filetypes = ["javascript" "typescript"];
+          };
+          nixd = {
+            enable = true;
+            settings.formatting.command = ["alejandra"];
+          };
+          elixirls = {
+            enable = true;
           };
         };
       };
