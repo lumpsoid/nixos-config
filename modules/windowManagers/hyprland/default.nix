@@ -4,25 +4,32 @@
   config,
   inputs,
   ...
-}: 
-let 
+}: let
   cfg = config.module.windowManager.hyprland;
-in
-{
+
+  browserExe = lib.getExe cfg.browser;
+  terminalExe = lib.getExe cfg.terminal;
+
+  printscreen = pkgs.callPackage ../../scripts/printscreen.nix {
+    useWayland = true;
+  };
+in {
   imports = [
     ../../status_bars/waybar/default.nix
     ../../terminals/foot/default.nix
   ];
 
   options = {
-    module.windowManager.hyprland = { 
+    module.windowManager.hyprland = {
       enable =
         lib.mkEnableOption "enable my custom config for hyperland";
+
+      browser = lib.mkPackageOption pkgs "ungoogled-chromium" {};
+      terminal = lib.mkPackageOption pkgs "foot" {};
     };
   };
 
   config = lib.mkIf cfg.enable {
-
     programs.hyprland = {
       enable = true;
       package = inputs.hyprland.packages."${pkgs.system}".hyprland;
@@ -78,27 +85,24 @@ in
         wlprop # to get window class
       ];
 
-
-      wayland.windowManager.hyprland =
-        let
-          browser = "chromium";
-          # how to get path here
-          terminal = "foot";
-        in 
-        {
+      wayland.windowManager.hyprland = {
         enable = true;
         settings = {
-          exec-once = [
+          exec-once =
+            [
+              "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+              "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
               #"${pkgs.swww}/bin/swww-daemon" # wallpaper
               #"${pkgs.swww}/bin/swww img /home/qq/Pictures/wallpaper/sad-loli.jpg"
-            "${pkgs.lxqt.lxqt-policykit}/bin/lxqt-policykit-agent"
-            "${pkgs.foot}/bin/foot --server"
-            "ssh-add /home/qq/.ssh/id_ssh_git"
-            "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-            "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-            "${pkgs.waybar}/bin/waybar"
-            "${pkgs.mako}/bin/mako"
-          ];
+              "${pkgs.lxqt.lxqt-policykit}/bin/lxqt-policykit-agent"
+              "${pkgs.openssh}/bin/ssh-add /home/qq/.ssh/id_ssh_git"
+              "${pkgs.waybar}/bin/waybar"
+              "${pkgs.mako}/bin/mako"
+            ]
+            ++ lib.lists.optional
+            (cfg.terminal.pname
+              == "foot")
+            "${terminalExe} --server";
 
           monitor = ", highres, auto, 1.0";
 
@@ -119,7 +123,7 @@ in
           misc = {
             enable_swallow = true;
             # The window class regex
-            swallow_regex = "foot";
+            swallow_regex = cfg.terminal.pname;
 
             font_family = "0xProto Nerd Font";
           };
@@ -143,12 +147,12 @@ in
           bind = [
             "$mod, Q, killactive"
             "$mod, D, exec, rofi -show drun -show-icons"
-            "$mod, W, exec, ${browser}"
-            "$mod, Return, exec, ${terminal}"
+            "$mod, W, exec, ${browserExe}"
+            "$mod, Return, exec, ${terminalExe}"
             "$mod, Space, layoutmsg, swapwithmaster master"
             "$mod CTRL, Space, togglefloating"
             "$mod, F, fullscreen"
-            
+
             # Move focus with vim like
             "$mod, l, movefocus, l"
             "$mod, h, movefocus, r"
@@ -172,7 +176,7 @@ in
             "$mod SHIFT, l, movewindow, r"
             "$mod SHIFT, k, movewindow, u  "
             "$mod SHIFT, j, movewindow, d"
-            
+
             # resize
             "$mod CTRL, h, resizeactive, -20 0"
             "$mod CTRL, l, resizeactive, 20 0"
@@ -199,6 +203,7 @@ in
             # Brightness
             ", XF86MonBrightnessUp, exec, light -A 5"
             ", XF86MonBrightnessDown, exec, light -U 5"
+            ", Print, exec, ${printscreen}/bin/printscreen"
           ];
         };
       };
