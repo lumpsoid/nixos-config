@@ -63,26 +63,25 @@
           commands = [
             {
               command = "${pkgs.systemd}/bin/systemctl suspend";
-              options = [ "NOPASSWD" ];
+              options = ["NOPASSWD"];
             }
             {
               command = "${pkgs.systemd}/bin/systemctl hibernate";
-              options = [ "NOPASSWD" ];
+              options = ["NOPASSWD"];
             }
             {
               command = "${pkgs.systemd}/bin/reboot";
-              options = [ "NOPASSWD" ];
+              options = ["NOPASSWD"];
             }
             {
               command = "${pkgs.systemd}/bin/poweroff";
-              options = [ "NOPASSWD" ];
+              options = ["NOPASSWD"];
             }
           ];
-          groups = [ "wheel" ];
+          groups = ["wheel"];
         }
       ];
     };
-
   };
   services.gnome.gnome-keyring.enable = true;
 
