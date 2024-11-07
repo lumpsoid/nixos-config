@@ -82,5 +82,23 @@
       "}"
     ],
     "description": "Create a TicketFormState class with Equatable"
+  },
+  "function": {
+    "prefix": "function",
+    "body": [
+      "${2:returnType} {1:functionName}() {",
+      "  return throw NoImplemendet();",
+      "}",
+    ],
+    "description": "Create a function"
+  },
+  "async function": {
+    "prefix": "afunction",
+    "body": [
+      "Future<${2:returnType}> {1:functionName}() async {",
+      "  return throw NoImplemendet();",
+      "}",
+    ],
+    "description": "Create an async function"
   }
 }
