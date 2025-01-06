@@ -158,8 +158,13 @@
   users.users.qq = {
     isNormalUser = true;
     description = "qq";
-    extraGroups = ["networkmanager" "wheel" "video" "adbusers" "docker"];
     shell = pkgs.fish;
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "video"
+      "docker"
+    ];
     packages = with pkgs; [
       android-udev-rules
       alejandra
