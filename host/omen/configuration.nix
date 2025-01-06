@@ -181,6 +181,7 @@
       alejandra
       fossil
       libreoffice-qt6
+      inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
     ];
   };
   programs.fish.enable = true;

@@ -30,6 +30,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    
     programs.hyprland = {
       enable = true;
       package = inputs.hyprland.packages."${pkgs.system}".hyprland;
@@ -103,6 +104,8 @@ in {
             (cfg.terminal.pname
               == "foot")
             "${terminalExe} --server";
+
+          env = "HYPRCURSOR_THEME,rose-pine-hyprcursor";
 
           monitor = ", highres, auto, 1.0";
           # trigger when the switch is turning off
