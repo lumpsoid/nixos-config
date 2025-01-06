@@ -161,7 +161,6 @@
     extraGroups = ["networkmanager" "wheel" "video" "adbusers" "docker"];
     shell = pkgs.fish;
     packages = with pkgs; [
-      #  thunderbird
       (vscode-with-extensions.override (oldAttrs: {
         vscode = vscodium.fhsWithPackages (ps: with ps; [elixir]);
         vscodeExtensions = with vscode-extensions;
