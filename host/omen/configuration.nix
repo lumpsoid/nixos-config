@@ -11,6 +11,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.default
+    ../../modules/apps/mtkclient/default.nix
     ../../modules/terminal_app/nvim/nixvim.nix
     ../../modules/windowManagers/hyprland/default.nix
     ../../modules/windowManagers/awesome/default.nix
@@ -193,6 +194,10 @@
     windowManager = {
       hyprland.enable = true;
       awesome.enable = true;
+    };
+    mtkclient = {
+      enable = false;
+      user = "qq";
     };
   };
 
