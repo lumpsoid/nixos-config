@@ -105,6 +105,12 @@ in {
             "${terminalExe} --server";
 
           monitor = ", highres, auto, 1.0";
+          # trigger when the switch is turning off
+          bindl = [
+            ", switch:off:Lid Switch,exec,hyprctl keyword monitor eDP-1, 1920x1080, 0x0, 1"
+            # trigger when the switch is turning on
+            ", switch:on:Lid Switch,exec,hyprctl keyword monitor eDP-1, disable"
+          ];
 
           # unscale XWayland
           xwayland = {
