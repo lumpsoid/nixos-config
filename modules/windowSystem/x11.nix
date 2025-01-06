@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }: let
   cfg = config.module.windowSystem.x11;
@@ -29,5 +30,9 @@ in {
         options = "grp:caps_toggle";
       };
     };
+
+    environment.systemPackages = with pkgs; [
+      arandr
+    ];
   };
 }
