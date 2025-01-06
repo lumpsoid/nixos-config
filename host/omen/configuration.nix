@@ -17,11 +17,14 @@
     ../../modules/windowManagers/awesome/default.nix
   ];
   # Bootloader.
-  #boot.kernelParams = ["psmouse.elantech_smbus=0"];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.initrd.luks.devices."luks-946adcd6-e77f-4d01-8062-6a2dc676f7ec".device = "/dev/disk/by-uuid/946adcd6-e77f-4d01-8062-6a2dc676f7ec";
+
+  # mouse fix (not working?)
+  boot.kernelParams = ["psmouse.elantech_smbus=0"];
+
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
