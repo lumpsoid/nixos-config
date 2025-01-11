@@ -22,7 +22,7 @@
       # capture screenshot
       import "$temp_path" &&
 
-      cat "$temp_path" | xclip -selection clipboard -target image/png -i | notify-send 'screenshot done' &&
+      xclip -selection clipboard -target image/png -i "$temp_path" | notify-send 'screenshot done' &&
 
       magick -quality 57 "$temp_path" "$out_path" &&
 
