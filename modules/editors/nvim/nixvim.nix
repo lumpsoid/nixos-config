@@ -462,6 +462,7 @@
           elixirls = {
             enable = true;
           };
+          rust_analyzer.enable = true;
         };
       };
     };
