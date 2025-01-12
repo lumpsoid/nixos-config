@@ -2,7 +2,6 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
-  config,
   pkgs,
   inputs,
   ...
@@ -10,12 +9,14 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    inputs.home-manager.nixosModules.default
-    ../../modules/apps/mtkclient/default.nix
-    ../../modules/terminal_app/nvim/nixvim.nix
-    ../../modules/windowManagers/hyprland/default.nix
-    ../../modules/windowManagers/awesome/default.nix
+    ../../modules/mtkclient/default.nix
+    ../../modules/editors/nvim/nixvim.nix
   ];
+
+  nixpkgs.overlays = [
+    inputs.niri.overlays.niri
+  ];
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -46,16 +47,23 @@
 
   # Enable the Enlightenment Desktop Environment.
   #services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
+  #services.xserver.displayManager.gdm.enable = true;
   #services.displayManager.sddm = {
   #  enable = true;
-  #  wayland.enable = true;
+  #  wayland.enable = false;
   #};
+
+  programs.niri = {
+    enable = true;
+    package = pkgs.niri-unstable;
+  };
 
   # Enable acpid
   services.acpid.enable = true;
 
   services.upower.enable = true;
+
+  services.logind.lidSwitch = "hibernate";
 
   security = {
     polkit.enable = true;
@@ -111,6 +119,21 @@
       XDG_CONFIG_HOME = "$HOME/.config";
       XDG_DATA_HOME = "$HOME/.local/share";
       XDG_STATE_HOME = "$HOME/.local/state";
+
+      #If your cursor becomes invisible
+      #WLR_NO_HARDWARE_CURSORS = "1";
+      #Hint electron apps to use wayland
+      NIXOS_OZONE_WL = "1";
+      MOZ_ENABLE_WAYLAND = 1;
+      QT_WAYLAND_DISABLE_WINDOWDECORATION = 1;
+      WLR_NO_HARDWARE_CURSORS = 1;
+      CLUTTER_BACKEND = "wayland";
+      XDG_SESSION_TYPE = "wayland";
+      #XDG_CURRENT_DESKTOP = "Hyprland";
+      #XDG_SESSION_DESKTOP = "Hyprland";
+      QT_QPA_PLATFORM = "wayland";
+      GDK_BACKEND = "wayland";
+      ELECTRON_OZONE_PLATFORM_HINT = "auto";
     };
     localBinInPath = true;
     variables = {
@@ -122,7 +145,6 @@
   # services.printing.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -138,24 +160,33 @@
     #media-session.enable = true;
   };
 
+  services.xserver.videoDrivers = [
+    "amdgpu"
+    "nvidia"
+  ];
   hardware = {
-    bluetooth.enable = true;
-  };
+    # then enabling pipewire
+    pulseaudio.enable = false;
 
-  services.xserver.videoDrivers = ["amdgpu" "nvidia"];
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = true;
-    powerManagement.finegrained = true;
-    open = false;
-    nvidiaSettings = true;
-    prime = {
-      offload = {
-        enable = true;
-        enableOffloadCmd = true;
+    bluetooth.enable = true;
+
+    graphics = {
+      enable = true;
+    };
+    nvidia = {
+      open = false;
+      modesetting.enable = true;
+      powerManagement.enable = true;
+      powerManagement.finegrained = true;
+      nvidiaSettings = true;
+      prime = {
+        offload = {
+          enable = true;
+          enableOffloadCmd = true;
+        };
+        nvidiaBusId = "PCI:1:0:0";
+        amdgpuBusId = "PCI:7:0:0";
       };
-      nvidiaBusId = "PCI:1:0:0";
-      amdgpuBusId = "PCI:7:0:0";
     };
   };
 
@@ -176,49 +207,56 @@
   users.users.qq = {
     isNormalUser = true;
     description = "qq";
-    shell = pkgs.fish;
     extraGroups = [
       "networkmanager"
       "wheel"
       "video"
       "docker"
     ];
+    shell = pkgs.zsh;
     packages = with pkgs; [
       android-udev-rules
       alejandra
       fossil
       libreoffice-qt6
+      ntfs3g
       inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
     ];
   };
-  programs.fish.enable = true;
-  programs.adb.enable = true;
+
   virtualisation.docker = {
     enable = true;
     daemon.settings.data-root = "/home/qq/Documents/programming/docker/data/";
-  };
-
-  module = {
-    windowManager = {
-      hyprland.enable = true;
-      awesome.enable = true;
-    };
-    mtkclient = {
-      enable = false;
-      user = "qq";
-    };
   };
 
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = {inherit inputs;};
+
+    backupFileExtension = "backup";
+
     users = {
       "qq" = import ./home.nix;
     };
   };
 
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;
+    };
+    knownHosts = {
+      "termux" = {
+        publicKey = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDKlCt3zpKlGn+gaA/U0zpsUT8haMHkt29EqvLv56bYTcgTOjJ0zI0FJHcsgSbWcYmcndjOC8G1tly7SOh7FqWsFNzVRGQo5p6lCA2dCbmISMWbf25wYxUfTqNmKpz6O+mWUM27kFyTmCZs9vPSfhD/BhAM2636cioGsG5wjVYfa3dkvbPA4En+QTjnVgdHHrc8rBBZyIvxT42Oa9nxAhQYZK8oMte2s1iOvrjWwlkcWbFhl0KFEBIDL30p8NTw0J6VdVNT8lNghR4rEqnMQbb9FFCvQRE9HvYK6Tk2MmphZ2YFtfmnwilCfcQuea8Utp5A74bv0WjtoDeLZJR9l4QEt1qngwfZLUlPxufJnMsIKhr1evrP3IT/X8XI+9iSnTcXPT+p0CDBFQn5yh61FkZVraTe823wuSVn2Fk6gQ0GkmamFrU9RJaLwD7/rn2Rt1UoEyE4/LEShAFef4yoOmteg+mBSsPdZL8NmYejPRJRDKRitxRET+ygaD39RdFvXHtzeL4CDbFHFIl+3OXzsr8f8Ydil09TQzfD9TJ9maoZ66TDek8K0oXNRgxc8GDJ8wpx91QBcWbrMNVyZmOOEU6VsArS98PS0egV4UNlfqKeCVz7rCycsqDS1Vqg28g/UZjPDojrFQre4ochd4TxRbCwqRGPVieXz7gUOH6RSbfhZQ==";
+      };
+    };
+  };
   programs = {
+    gnupg.agent = {
+      enable = true;
+      #enableSSHSupport = true;
+    };
     # Install firefox.
     firefox.enable = true;
     light.enable = true;
@@ -233,14 +271,37 @@
       escapeTime = 10;
     };
     appimage.binfmt = true;
+    adb.enable = true;
+
+    fzf = {
+      fuzzyCompletion = true;
+      keybindings = true;
+    };
+
+    zsh = {
+      enable = true;
+      histSize = 4000;
+      setOptions = [
+        "HIST_IGNORE_DUPS"
+        "SHARE_HISTORY"
+        "HIST_FCNTL_LOCK"
+        "HIST_EXPIRE_DUPS_FIRST"
+        "HIST_REDUCE_BLANKS"
+      ];
+    };
   };
 
-  xdg.portal = {
+  services.ollama = {
     enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
-    ];
+    acceleration = "cuda";
   };
+
+  # xdg.portal = {
+  #   enable = true;
+  #   extraPortals = with pkgs; [
+  #     xdg-desktop-portal-gtk
+  #   ];
+  # };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -255,6 +316,7 @@
     lxqt.lxqt-policykit
     sxiv
     mpv
+    streamlink
     tldr
     btop
     dua
@@ -262,7 +324,6 @@
     fzf
     git
     lazygit
-    xclip
     ranger
     zip
     unzip
@@ -274,6 +335,10 @@
     trashy
     appimage-run
     jq
+    tree
+    file
+    nix-index
+    shadowsocks-libev
   ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];

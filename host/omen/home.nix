@@ -1,11 +1,12 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ../../modules/scripts/rebuild.nix
     ../../modules/scripts/devshellnix/devshellnix.nix
+    ../../modules/profiles/wayland/windowManagers/niri
+    ../../modules/profiles/wayland/terminals/foot
+    ../../modules/profiles/wayland/status_bars/waybar
+    ../../modules/profiles/wayland/notifications/mako
+    ../../modules/profiles/wayland/packages
   ]; # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "qq";
@@ -25,30 +26,22 @@
   home.packages = with pkgs; [
     #badwolf
     bat
-    meld
+    meld # gui diff tool
     ungoogled-chromium
     broot
-    joshuto
+    joshuto # rust file manager
     localsend
-    unison
-    kdePackages.okular
+    unison # ocaml sync tool
+    kdePackages.okular # documents viewer
     zoom-us
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
 
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+    jql # rust jq
+    monolith # rust bundle html into a single file
+    pastel # rust to manipulate colors
+    pipr # interactive pipe lines
+    fd # rust find alternative
 
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
+    discord
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -91,24 +84,19 @@
   };
 
   programs = {
-    fzf = {
-      enable = true;
-      enableFishIntegration = true;
-    };
-
     git = {
       enable = true;
-      userEmail = "mmgeeki@gmail.com";
+      userEmail = "79290581+lumpsoid@users.noreply.github.com";
       userName = "lumpsoid";
     };
-
-    fish.enable = true;
   };
 
-  services = {
-    dunst = {
-      enable = true;
-    };
+  profile.wayland = {
+    packages.enable = true;
+    windowManager.niri.enable = true;
+    status-bar.waybar.enable = true;
+    terminal.foot.enable = true;
+    notification.mako.enable = true;
   };
 
   scripts = {

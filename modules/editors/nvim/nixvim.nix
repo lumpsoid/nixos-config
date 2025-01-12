@@ -365,7 +365,7 @@
         enable = true;
         fromVscode = [
           {}
-          {paths = ../../gui_apps/vscode/snippets;}
+          {paths = ../vscode/snippets;}
         ];
       };
       cmp = {
