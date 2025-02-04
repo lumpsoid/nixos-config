@@ -68,6 +68,15 @@
     keymaps = [
       {
         mode = "n";
+        key = "<leader>bc";
+        action = "<cmd>bdelete<CR>";
+        options = {
+          desc = "close current buffer";
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
         key = "-";
         action = "<cmd>Oil<CR>";
         options = {
