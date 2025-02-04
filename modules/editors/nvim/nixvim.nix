@@ -300,6 +300,7 @@
         };
         links = {
           style = "wiki";
+          conceal = true;
         };
         mappings = {
           MkdnNextLink = false;
