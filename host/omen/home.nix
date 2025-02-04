@@ -3,6 +3,7 @@
     ../../modules/scripts/rebuild.nix
     ../../modules/scripts/devshellnix/devshellnix.nix
     ../../modules/profiles/wayland/windowManagers/niri
+    ../../modules/profiles/wayland/windowManagers/sway
     ../../modules/profiles/wayland/terminals/foot
     ../../modules/profiles/wayland/status_bars/waybar
     ../../modules/profiles/wayland/notifications/mako
@@ -93,8 +94,17 @@
 
   profile.wayland = {
     packages.enable = true;
-    windowManager.niri.enable = true;
-    status-bar.waybar.enable = true;
+
+    windowManager = {
+      niri.enable = true;
+      sway.enable = true;
+    };
+
+    status-bar.waybar = {
+      enable = true;
+      windowManager = "sway";
+    };
+
     terminal.foot.enable = true;
     notification.mako.enable = true;
   };

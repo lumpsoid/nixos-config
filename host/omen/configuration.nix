@@ -57,6 +57,7 @@
     enable = true;
     package = pkgs.niri-unstable;
   };
+  programs.sway.enable = true;
 
   # Enable acpid
   services.acpid.enable = true;
