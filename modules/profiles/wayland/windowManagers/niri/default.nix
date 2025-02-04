@@ -17,9 +17,18 @@ in {
     programs.niri = {
 
       settings = {
+        spawn-at-startup = [
+          { command = ["waybar"]; }
+        ];
+
         input.keyboard = {
+          xkb = { 
+            layout = "us,ru(typewriter)";
+            options = "grp:caps_toggle";
+          };
+
           repeat-delay = 300;
-          repeat-rate = 30;
+          repeat-rate = 40;
         };
         window-rules = [
           {
