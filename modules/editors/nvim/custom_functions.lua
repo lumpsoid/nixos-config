@@ -144,7 +144,7 @@ function M.current_link()
   return link
 end
 
-local note_template = "\n#N\n- \n- "
+local note_template = "\n#N\n- \n\n## Backlinks\n- "
 
 function M.pathToCurrentFolder()
   return vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":h")
