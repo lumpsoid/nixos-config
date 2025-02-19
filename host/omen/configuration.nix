@@ -11,6 +11,7 @@
     ./hardware-configuration.nix
     ../../modules/mtkclient/default.nix
     ../../modules/editors/nvim/nixvim.nix
+    ../../modules/universe/wayland/variables
   ];
 
   nixpkgs.overlays = [
@@ -121,20 +122,8 @@
       XDG_DATA_HOME = "$HOME/.local/share";
       XDG_STATE_HOME = "$HOME/.local/state";
 
-      #If your cursor becomes invisible
-      #WLR_NO_HARDWARE_CURSORS = "1";
-      #Hint electron apps to use wayland
-      NIXOS_OZONE_WL = "1";
-      MOZ_ENABLE_WAYLAND = 1;
-      QT_WAYLAND_DISABLE_WINDOWDECORATION = 1;
-      WLR_NO_HARDWARE_CURSORS = 1;
-      CLUTTER_BACKEND = "wayland";
-      XDG_SESSION_TYPE = "wayland";
       #XDG_CURRENT_DESKTOP = "Hyprland";
       #XDG_SESSION_DESKTOP = "Hyprland";
-      QT_QPA_PLATFORM = "wayland";
-      GDK_BACKEND = "wayland";
-      ELECTRON_OZONE_PLATFORM_HINT = "auto";
     };
     localBinInPath = true;
     variables = {
@@ -364,6 +353,8 @@
       4000
     ];
   };
+
+  universe.wayland.variables.enable = true;
 
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
