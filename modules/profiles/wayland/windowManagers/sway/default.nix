@@ -4,14 +4,14 @@
   config,
   ...
 }: let
-  cfg = config.profile.windowManager.sway;
+  cfg = config.profile.wayland.windowManager.sway;
 
-  printscreen = pkgs.callPackage ../../scripts/printscreen.nix {
+  printscreen = pkgs.callPackage ../../../../scripts/printscreen.nix {
     useWayland = true;
   };
 in {
   options = {
-    profile.windowManager.sway = {
+    profile.wayland.windowManager.sway = {
       enable =
         lib.mkEnableOption "enable my sway config";
     };
