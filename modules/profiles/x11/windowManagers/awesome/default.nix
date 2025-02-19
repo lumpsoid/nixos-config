@@ -6,7 +6,7 @@
 }: let
   cfg = config.profile.windowManager.awesome;
 
-  printscreen = pkgs.callPackage ../../scripts/printscreen.nix {
+  printscreen = pkgs.callPackage ../../../../scripts/printscreen.nix {
     useWayland = false;
   };
 in {
