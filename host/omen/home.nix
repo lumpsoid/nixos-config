@@ -8,6 +8,7 @@
     ../../modules/profiles/wayland/status_bars/waybar
     ../../modules/profiles/wayland/notifications/mako
     ../../modules/profiles/wayland/packages
+    ../../modules/profiles/x11/windowManagers/awesome
   ]; # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "qq";
