@@ -59,6 +59,9 @@
     package = pkgs.niri-unstable;
   };
   programs.sway.enable = true;
+  services.xserver.enable = true;
+  services.xserver.autorun = false;
+  services.xserver.displayManager.startx.enable = true;
 
   # Enable acpid
   services.acpid.enable = true;
