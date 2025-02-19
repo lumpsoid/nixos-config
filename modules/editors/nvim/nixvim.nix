@@ -299,8 +299,9 @@
           rootTell = "index.md";
         };
         links = {
-          style = "wiki";
+          style = "markdown";
           conceal = true;
+          #implicit_extension = "md";
         };
         mappings = {
           MkdnNextLink = false;
